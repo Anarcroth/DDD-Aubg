@@ -1,0 +1,6 @@
+# Ignore all VS meta data code.
+.vs/
+*.sln
+DDD_HW1_ValueObjects/bin/*
+*.csproj
+DDD_HW1_ValueObjects/obj/*
