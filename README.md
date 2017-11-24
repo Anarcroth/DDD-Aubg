@@ -17,3 +17,12 @@ of writing *VO*'s. Also the implementation *overrides* the `Equals()` method and
 The *Entity Object* is only the `Player` class. The entity by which we recognize this class is the `name` property.
 
 The application is a **.NET** console app, driven by the `Program` class.
+
+### Team Homework Explenation
+
+##### The purpose of this homework was to create some functionality for our current Flower Business
+
+In the project we implemented the general entities and value objects that are used. We used a abstract `ValueObject` class that is then used by `Items` and `Flowers`. We have an interfaces
+that is a makeshift repository for `Employees`. Through that repository we are able to control the Employees and then they can interact with the `Boxes` we have.
+
+The value of the boxes and their status is updated to indicate how they are scanned and their flowers amount has diminished.
