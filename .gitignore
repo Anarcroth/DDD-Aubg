@@ -5,5 +5,5 @@ DDD_HW1_ValueObjects/bin/*
 *.csproj
 DDD_HW1_ValueObjects/obj/*
 FlowerBusiness/*.sln
-FlowerBusiness/bin/*
-FlowerBusiness/obj/*
+FlowerBusiness/FlowerBusiness/bin/*
+FlowerBusiness/FlowerBusiness/obj/*
