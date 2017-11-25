@@ -1,9 +1,0 @@
-# Ignore all VS meta data code.
-.vs/
-*.sln
-DDD_HW1_ValueObjects/bin/*
-*.csproj
-DDD_HW1_ValueObjects/obj/*
-FlowerBusiness/*.sln
-FlowerBusiness/FlowerBusiness/bin/*
-FlowerBusiness/FlowerBusiness/obj/*
