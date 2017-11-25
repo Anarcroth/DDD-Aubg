@@ -6,9 +6,9 @@ namespace FlowerBusiness.Domain
 {
     public class Box
     {
-        public Box(string id, bool isScanned, int amount, Flower fl)
+        public Box(string id, int flowerAmount, Flower flower)
         {
-            if (fl == null)
+            if (flower == null)
             {
                 new NullReferenceException("no flower specified");
             }
@@ -18,23 +18,20 @@ namespace FlowerBusiness.Domain
                 new NullReferenceException("no id specified");
             }
 
-            if (amount <= 0)
+            if (flowerAmount <= 0)
             {
-                new NullReferenceException("no amount specified");
+                new NullReferenceException("no flower amount specified");
             }
 
             this.id = id;
-            this.amount = amount;
-            this.fl = fl;
-            this.isScanned = isScanned;
+            this.flowerAmount = flowerAmount;
+            this.flower = flower;
         }
 
-        public Flower fl { get; set; }
+        public Flower flower { get; set; }
 
-        public int amount { get; set; }
+        public int flowerAmount { get; set; }
 
         public string id { get; set; }
-
-        public bool isScanned { get; set; }
     }
 }

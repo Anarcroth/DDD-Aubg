@@ -4,25 +4,25 @@ using System.Text;
 
 namespace FlowerBusiness.Domain
 {
-    public class DummyEmployeeRepository : IEmployeeRepository
+    public class DummyPickerRepository : IPickerRepository
     {
         private Picker Martha;
         private Picker Benny;
 
-        public DummyEmployeeRepository()
+        public DummyPickerRepository()
         {
-            this.Martha = new Picker(96, "Martha");
-            this.Benny = new Picker(42, "Benny");
+            this.Martha = new Picker("96", "Martha");
+            this.Benny = new Picker("42", "Benny");
         }
 
-        public Picker RetrieveEmployee(int id)
+        public Picker RetrievePicker(string id)
         {
-            if (id == 96)
+            if (id.Equals("96"))
             {
                 return Martha;
             }
 
-            if (id == 42)
+            if (id.Equals("42"))
             {
                 return Benny;
             }
@@ -30,7 +30,7 @@ namespace FlowerBusiness.Domain
             return null;
         }
 
-        public void SaveEmployee(Picker em)
+        public void SavePicker(Picker em)
         {
 
         }

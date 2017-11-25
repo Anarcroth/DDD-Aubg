@@ -673,11 +673,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "E:\\Utility Programs\\VS - C#\\DDD_HW1_ValueObjects\\FlowerBusiness\\FlowerBusiness\\FlowerBusiness.Domain.csproj",
+      "projectUniqueName": "E:\\Utility Programs\\VS - C#\\DDD_HW1_ValueObjects\\FB_sln\\FlowerBusiness\\FlowerBusiness.Domain.csproj",
       "projectName": "FlowerBusiness.Domain",
-      "projectPath": "E:\\Utility Programs\\VS - C#\\DDD_HW1_ValueObjects\\FlowerBusiness\\FlowerBusiness\\FlowerBusiness.Domain.csproj",
+      "projectPath": "E:\\Utility Programs\\VS - C#\\DDD_HW1_ValueObjects\\FB_sln\\FlowerBusiness\\FlowerBusiness.Domain.csproj",
       "packagesPath": "C:\\Users\\Martin\\.nuget\\packages\\",
-      "outputPath": "E:\\Utility Programs\\VS - C#\\DDD_HW1_ValueObjects\\FlowerBusiness\\FlowerBusiness\\obj\\",
+      "outputPath": "E:\\Utility Programs\\VS - C#\\DDD_HW1_ValueObjects\\FB_sln\\FlowerBusiness\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

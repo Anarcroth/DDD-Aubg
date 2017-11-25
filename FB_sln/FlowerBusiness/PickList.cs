@@ -1,34 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace FlowerBusiness.Domain
 {
     public class PickList
     {
-        public PickList()
-        {
-            // Set default id value
-            status = "Not started";
-            id = id.GetHashCode() + 100;
-            pickListItems = new List<Items>(2);
-            pickListItems.Add(new Items(new Flower("roses"), 5));
-            pickListItems.Add(new Items(new Flower("tulips"), 8));
-        }
-
         public int id { get; set; }
 
         public List<Items> pickListItems { get; set; }
 
         public Picker picker { get; set; }
 
-        public string status { get; set;  }
+        public string status { get; set; }
+        public PickList()
+        {
+            // Set default id value
+            status = "Not started";
+            id = id.GetHashCode() + 100;
+            pickListItems = new List<Items>(2);
+        }
 
-        public PickList(List<Items> items, int id, Picker employee, string status)
+        public PickList(List<Items> items, int id, Picker picker, string status)
         {
             pickListItems = items;
             this.id = id;
-            this.picker = employee;
+            this.picker = picker;
             this.status = status;
         }
 
@@ -48,6 +46,15 @@ namespace FlowerBusiness.Domain
             }
         }
 
+        private bool isListTaken()
+        {
+            if (this.picker == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public void associatePickerToList(Picker picker)
         {
             if (picker == null)
@@ -55,7 +62,22 @@ namespace FlowerBusiness.Domain
                 new NullReferenceException("no picker specified");
             }
 
+            if (isListTaken())
+            {
+                new Exception("list is already taken");
+            }
+
             this.picker = picker;
+        }
+
+        public void checkItemAmount(Items item)
+        {
+            var allPicked = this.pickListItems.All(i => i.status == "COMPLETE");
+
+            if (allPicked == true)
+            {
+                this.updateStatus("COMPLETE");
+            }
         }
     }
 }

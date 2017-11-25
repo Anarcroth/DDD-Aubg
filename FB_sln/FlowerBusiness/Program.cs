@@ -10,38 +10,40 @@ namespace FlowerBusiness.Domain
 
             OrderList generalOrder = new OrderList();
 
-            var emRepo = new DummyEmployeeRepository();
+            var emRepo = new DummyPickerRepository();
 
-            // make assignment method for employee
-            emRepo.RetrieveEmployee(96).List = generalOrder.pickLists[0];
-            emRepo.RetrieveEmployee(42).List = generalOrder.pickLists[1];
+            generalOrder.pickLists[0].pickListItems.Add(new Items(new Flower("roses"), 5));
+            generalOrder.pickLists[0].pickListItems.Add(new Items(new Flower("tulips"), 8));
+            generalOrder.pickLists[1].pickListItems.Add(new Items(new Flower("roses"), 10));
+            generalOrder.pickLists[1].pickListItems.Add(new Items(new Flower("tulips"), 15));
 
-            Box box1 = new Box("1", false, 20, new Flower("roses"));
-            Box box2 = new Box("2", false, 20, new Flower("tulips"));
-            
-            if (box1.isScanned == false && box2.isScanned == false)
+            generalOrder.pickLists[0].associatePickerToList(emRepo.RetrievePicker("96"));
+            emRepo.RetrievePicker("96").associatePickerToList(generalOrder.pickLists[0]);
+            generalOrder.pickLists[1].associatePickerToList(emRepo.RetrievePicker("42"));
+            emRepo.RetrievePicker("42").associatePickerToList(generalOrder.pickLists[1]);
+
+            Box box1 = new Box("1", 20, new Flower("roses"));
+            Box box2 = new Box("2", 20, new Flower("tulips"));
+
+            if (emRepo.RetrievePicker("96").canPickFlowers(box1) == true)
             {
-                if (emRepo.RetrieveEmployee(96).canPickFlowers(box1) == true)
-                {
-                    emRepo.RetrieveEmployee(96).pickFlowers(box1);
-                    //box1.isScanned = true;
-                }
-
-                if (emRepo.RetrieveEmployee(42).canPickFlowers(box2) == true)
-                {
-                    emRepo.RetrieveEmployee(42).pickFlowers(box2);
-                    //box2.isScanned = true;
-                }
+                emRepo.RetrievePicker("96").pickFlowers(box1);
             }
 
-            Console.WriteLine("Martha has " + emRepo.RetrieveEmployee(96).pickedFlowers[0].Flowers.type);
-            Console.WriteLine("She has this many roses: " + emRepo.RetrieveEmployee(96).pickedFlowers[0].amount);
+            if (emRepo.RetrievePicker("96").canPickFlowers(box2) == true)
+            {
+                emRepo.RetrievePicker("96").pickFlowers(box2);
+            }
 
-            Console.WriteLine("Benny has " + emRepo.RetrieveEmployee(42).pickedFlowers[0].Flowers.type);
-            Console.WriteLine("He has this many tulips: " + emRepo.RetrieveEmployee(42).pickedFlowers[0].amount);
+            if (emRepo.RetrievePicker("42").canPickFlowers(box2) == true)
+            {
+                emRepo.RetrievePicker("42").pickFlowers(box2);
+            }
 
-            Console.WriteLine("Box 1 has this many flowers now " + box1.amount + " and they are " + box1.fl.type);
-            Console.WriteLine("Box 2 has this many flowers now " + box2.amount + " and they are " + box2.fl.type);
+            Console.WriteLine("is pick list 0 complete : " + generalOrder.pickLists[0].status);        
+
+            Console.WriteLine("Box 1 has this many flowers now " + box1.flowerAmount + " and they are " + box1.flower.type);
+            Console.WriteLine("Box 2 has this many flowers now " + box2.flowerAmount + " and they are " + box2.flower.type);
         }
     }
 }

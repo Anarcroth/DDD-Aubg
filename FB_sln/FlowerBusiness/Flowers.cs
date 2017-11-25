@@ -7,7 +7,7 @@ namespace FlowerBusiness.Domain
     public class Flower : ValueObject
     {
         public string type { get; }
-
+        
         public Flower(string type)
         {
             if (string.IsNullOrEmpty(type))
@@ -16,6 +16,15 @@ namespace FlowerBusiness.Domain
             }
 
             this.type = type;
+        }
+
+        public bool HasSameType(string type)
+        {
+            if (this.type.Equals(type))
+            {
+                return true;
+            }
+            return false;
         }
 
         protected override IEnumerable<object> GetEqualityComponents()

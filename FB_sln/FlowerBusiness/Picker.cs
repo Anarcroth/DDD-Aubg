@@ -6,9 +6,9 @@ namespace FlowerBusiness.Domain
 {
     public class Picker
     {
-        public Picker(int id, string name)
+        public Picker(string id, string name)
         {
-            if (id == null || id == 0)
+            if (string.IsNullOrEmpty(id))
             {
                 new NullReferenceException("no id specified");
             }
@@ -20,22 +20,29 @@ namespace FlowerBusiness.Domain
 
             this.id = id;
             this.name = name;
-            pickedFlowers = new List<Items>(2);
         }
 
-        public int id { get; private set; }
+        public string id { get; private set; }
 
         public string name { get; private set; }
 
-        public PickList List { get; set; }
+        public PickList pickList { get; set; }
 
-        public List<Items> pickedFlowers { get; set; }
+        public void associatePickerToList(PickList pickList)
+        {
+            if (pickList == null)
+            {
+                new Exception("no pick list specified");
+            }
+
+            this.pickList = pickList;
+        }
 
         public bool canPickFlowers(Box box)
         {
-           foreach (Items it in List.pickListItems)
+           foreach (Items it in pickList.pickListItems)
             {
-                if (it.Flowers.type == box.fl.type && box.amount > it.amount)
+                if (it.Flowers.HasSameType(box.flower.type) && box.flowerAmount > it.amount)
                 {
                     return true;
                 }
@@ -45,13 +52,15 @@ namespace FlowerBusiness.Domain
 
         public void pickFlowers(Box box)
         {
-            foreach (Items it in List.pickListItems)
+            foreach (Items it in pickList.pickListItems)
             {
-                if (it.Flowers.type == box.fl.type && box.amount > it.amount)
+                if (it.Flowers.HasSameType(box.flower.type) && box.flowerAmount > it.amount)
                 {
-                    box.amount -= it.amount;
-                    pickedFlowers.Add(it);
+                    box.flowerAmount -= it.amount;
+                    it.pickItem(it.amount);
                 }
+
+                pickList.checkItemAmount(it);
             }
         }
     }
