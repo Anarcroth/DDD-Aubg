@@ -11,6 +11,12 @@ namespace FlowerBusiness.Domain
         public int flowerAmount { get; set; }
 
         public string id { get; set; }
+
+        public Box()
+        {
+
+        }
+
         public Box(string id, int flowerAmount, Flower flower)
         {
             if (flower == null)
@@ -40,6 +46,20 @@ namespace FlowerBusiness.Domain
                 return true;
             }
             return false;
+        }
+
+        public void updateSize(int amount)
+        {
+            if (this.flowerAmount > amount)
+            {
+                // Create a brand new box with a new identifier, but with the same type of flower
+                this.id = Guid.NewGuid().ToString();
+                this.flowerAmount = Math.Abs(amount - this.flowerAmount);
+            }
+            else
+            {
+                this.flowerAmount = 0;
+            }
         }
     }
 }

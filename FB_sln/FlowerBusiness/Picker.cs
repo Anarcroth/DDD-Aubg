@@ -50,23 +50,17 @@ namespace FlowerBusiness.Domain
             return false;
         }
 
-        public void pickFlowers(Box box)
+        public void pickFlowersFrom(Box box)
         {
             foreach (Item item in pickList.Items)
             {
                 if (item.Flowers.HasSameType(box.flower.type) && item.status != "COMPLETE")
                 {
-                    item.pickItem(item.amount);
+                    int amount = item.amount;
 
-                    if (box.flowerAmount > item.amount)
-                    {
-                        // Create a brand new box with a new identifier, but with the same type of flower
-                        box = new Box(Guid.NewGuid().ToString(), Math.Abs(item.amount - box.flowerAmount), box.flower);
-                    }
-                    else
-                    {
-                        box = null;
-                    }
+                    item.pickItem(amount);
+
+                    box.updateSize(amount);
                 }
                 pickList.checkItemAmount(item);
             }

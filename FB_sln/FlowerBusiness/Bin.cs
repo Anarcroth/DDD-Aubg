@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace FlowerBusiness.Domain
 {
@@ -9,6 +10,8 @@ namespace FlowerBusiness.Domain
         public string id { get; set; }
 
         public List<Box> boxes { get; set; }
+
+        public int maxCapacity { get; set; }
 
         public Bin()
         {
@@ -19,6 +22,8 @@ namespace FlowerBusiness.Domain
             boxes.Add(new Box(Guid.NewGuid().ToString(), 20, new Flower("tulips")));
             boxes.Add(new Box(Guid.NewGuid().ToString(), 20, new Flower("lillies")));
             boxes.Add(new Box(Guid.NewGuid().ToString(), 20, new Flower("tomatoes")));
+
+            maxCapacity = 80;
         }
 
         public Bin(int size)
@@ -29,10 +34,28 @@ namespace FlowerBusiness.Domain
             boxes = new List<Box>(size);
             for (int n = 0; n < size; n++)
             {
+                int amount = new Random().Next(1, 20);
+
+                maxCapacity += amount;
+
                 boxes.Add(new Box(Guid.NewGuid().ToString(), 
-                    new Random().Next(1, 20),
+                    amount,
                     new Flower(flowerTypes[new Random().Next(0, flowerTypes.Length)])));
             }
+        }
+
+        public bool isFull()
+        {
+            if (maxCapacity == boxes.Sum(b => b.flowerAmount))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void updateStorage()
+        {
+            boxes.ForEach(b => b.flowerAmount -= 1);
         }
     }
 }

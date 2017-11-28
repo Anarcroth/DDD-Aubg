@@ -26,11 +26,11 @@ namespace FlowerBusiness.Domain
                 // and check if they can pick the flowers for their order in their pick list.
                 if (pickerRepo.RetrievePicker("96").canPickFlowersFrom(b))
                 {
-                    pickerRepo.RetrievePicker("96").pickFlowers(b);
+                    pickerRepo.RetrievePicker("96").pickFlowersFrom(b);
                 }
                 if (pickerRepo.RetrievePicker("42").canPickFlowersFrom(b))
                 {
-                    pickerRepo.RetrievePicker("42").pickFlowers(b);
+                    pickerRepo.RetrievePicker("42").pickFlowersFrom(b);
                 }
             }
 
@@ -39,13 +39,21 @@ namespace FlowerBusiness.Domain
                 //pickerRepo.RetrievePicker("96").packageFlowers();
             }
 
+            // Before closing the shift, update the status of the Order List
             generalOrder.updateStatus();
 
-            Console.WriteLine("The end of the shift is here. The order list is " + generalOrder.status + " and the status of the orders are: ");
+            Console.WriteLine("\nThe end of the shift is here. The order list is " + generalOrder.status + " and the status of the orders are: ");
 
             foreach (PickList pl in generalOrder.pickLists)
             {
                 Console.WriteLine(pl.id + " -- " + pl.status);
+            }
+
+            Console.WriteLine("\nThe storage is with these items left.\n");
+
+            foreach (Box b in bin.boxes)
+            {
+                Console.WriteLine(b.id + " -- " + b.flower.type + " -- " + b.flowerAmount);
             }
             
         }
