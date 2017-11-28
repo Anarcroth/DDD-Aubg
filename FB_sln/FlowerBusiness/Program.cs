@@ -35,16 +35,24 @@ namespace FlowerBusiness.Domain
                 }
                 if (pickerRepo.RetrievePicker("42").canPickFlowersFrom(b))
                 {
-                    //pickerRepo.RetrievePicker("42").pickFlowers(b);
+                    pickerRepo.RetrievePicker("42").pickFlowers(b);
                 }
             }
 
-
-            foreach (Item i in pickerRepo.RetrievePicker("96").pickList.Items)
+            if (pickerRepo.RetrievePicker("96").completedPickList())
             {
-            Console.WriteLine("a: " + i.amount + " b: " + i.status + " c: " + i.Flowers.type);
-
+                //pickerRepo.RetrievePicker("96").packageFlowers();
             }
+
+            generalOrder.updateStatus();
+
+            Console.WriteLine("The end of the shift is here. The order list is " + generalOrder.status + " and the status of the orders are: ");
+
+            foreach (PickList pl in generalOrder.pickLists)
+            {
+                Console.WriteLine(pl.id + " -- " + pl.status);
+            }
+            
         }
 
         public static void assignPickersWork(Picker picker, OrderList generalOrder)

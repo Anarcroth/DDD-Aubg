@@ -18,7 +18,7 @@ namespace FlowerBusiness.Domain
         public PickList()
         {
             id = Guid.NewGuid().ToString();
-            status = "Pick List " + id + " not started";
+            status = "INCOMPLETE";
             // The default size of the pick list is with 2 items in it
             Items = new List<Item>(2);
         }
@@ -26,7 +26,7 @@ namespace FlowerBusiness.Domain
         public PickList(int size)
         {
             id = Guid.NewGuid().ToString();
-            status = "Pick List " + id + " not started";
+            status = "INCOMPLETE";
             Items = new List<Item>(size);
         }
 
@@ -82,7 +82,7 @@ namespace FlowerBusiness.Domain
         {
             var allPicked = this.Items.All(i => i.status == "COMPLETE");
 
-            if (allPicked == true)
+            if (allPicked)
             {
                 this.updateStatus("COMPLETE");
             }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace FlowerBusiness.Domain
 {
@@ -17,7 +18,7 @@ namespace FlowerBusiness.Domain
 
         public OrderList()
         {
-            status = "Order List " + id + " not started";
+            status = "INCOMPLETE";
             id = Guid.NewGuid().ToString();
             // Default size number of the order list is with 2 pick lists
             pickLists = new List<PickList>(2);
@@ -34,7 +35,7 @@ namespace FlowerBusiness.Domain
                 pickLists.Add(new PickList(rnd.Next(1, 11)));
             }
 
-            status = "Order List " + id + " not started";
+            status = "INCOMPLETE";
         }
 
         public OrderList(List<PickList> lists, string id, string status)
@@ -44,11 +45,13 @@ namespace FlowerBusiness.Domain
             this.status = status;
         }
 
-        public void updateStatus(string status)
+        public void updateStatus()
         {
-            if (this.status != status)
+            var allDone = this.pickLists.All(i => i.status == "COMPLETE");
+
+            if (allDone)
             {
-                this.status = status;
+                this.status = "COMPLETE";
             }
         }
 

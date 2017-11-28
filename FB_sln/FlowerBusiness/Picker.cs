@@ -71,5 +71,14 @@ namespace FlowerBusiness.Domain
                 pickList.checkItemAmount(item);
             }
         }
+
+        public bool completedPickList()
+        {
+            if (pickList.status == "COMPLETE")
+            {
+                return false;
+            }
+            return false;
+        }
     }
 }
