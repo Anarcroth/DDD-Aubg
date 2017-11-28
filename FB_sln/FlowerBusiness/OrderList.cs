@@ -58,9 +58,9 @@ namespace FlowerBusiness.Domain
 
             foreach (PickList list in pickLists)
             {
-                for (int n = 0; n < list.pickListItems.Capacity; n++)
+                for (int n = 0; n < list.Items.Capacity; n++)
                 {
-                    list.pickListItems.Add(new Items(new Flower(flowerTypes[rnd.Next(0, flowerTypes.Length)]), rnd.Next(1, 6)));
+                    list.Items.Add(new Item(new Flower(flowerTypes[rnd.Next(0, flowerTypes.Length)]), rnd.Next(1, 6)));
                 }
             }
         }

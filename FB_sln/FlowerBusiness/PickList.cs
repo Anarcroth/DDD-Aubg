@@ -9,7 +9,7 @@ namespace FlowerBusiness.Domain
     {
         public string id { get; set; }
 
-        public List<Items> pickListItems { get; set; }
+        public List<Item> Items { get; set; }
 
         public Picker picker { get; set; }
 
@@ -20,19 +20,19 @@ namespace FlowerBusiness.Domain
             id = Guid.NewGuid().ToString();
             status = "Pick List " + id + " not started";
             // The default size of the pick list is with 2 items in it
-            pickListItems = new List<Items>(2);
+            Items = new List<Item>(2);
         }
 
         public PickList(int size)
         {
             id = Guid.NewGuid().ToString();
             status = "Pick List " + id + " not started";
-            pickListItems = new List<Items>(size);
+            Items = new List<Item>(size);
         }
 
-        public PickList(List<Items> items, string id, Picker picker, string status)
+        public PickList(List<Item> items, string id, Picker picker, string status)
         {
-            pickListItems = items;
+            Items = items;
             this.id = id;
             this.picker = picker;
             this.status = status;
@@ -78,9 +78,9 @@ namespace FlowerBusiness.Domain
             this.picker = picker;
         }
 
-        public void checkItemAmount(Items item)
+        public void checkItemAmount(Item item)
         {
-            var allPicked = this.pickListItems.All(i => i.status == "COMPLETE");
+            var allPicked = this.Items.All(i => i.status == "COMPLETE");
 
             if (allPicked == true)
             {

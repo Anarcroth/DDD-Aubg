@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FlowerBusiness.Domain
 {
@@ -17,30 +18,28 @@ namespace FlowerBusiness.Domain
             assignPickersWork(pickerRepo.RetrievePicker("96"), generalOrder);
             assignPickersWork(pickerRepo.RetrievePicker("42"), generalOrder);
 
-            Box box1 = new Box("1", 20, new Flower("roses"));
-            Box box2 = new Box("2", 20, new Flower("tulips"));
-            Box box4 = new Box("3", 20, new Flower("lillies"));
-            Box box3 = new Box("4", 20, new Flower("tomatoes"));
+            List<Box> bin = new List<Box>(4);
 
-            if (pickerRepo.RetrievePicker("96").canPickFlowers(box1) == true)
+            bin.Add(new Box(Guid.NewGuid().ToString(), 20, new Flower("roses")));
+            bin.Add(new Box(Guid.NewGuid().ToString(), 20, new Flower("tulips")));
+            bin.Add(new Box(Guid.NewGuid().ToString(), 20, new Flower("lillies")));
+            bin.Add(new Box(Guid.NewGuid().ToString(), 20, new Flower("tomatoes")));
+
+            foreach (Box b in bin)
             {
-                pickerRepo.RetrievePicker("96").pickFlowers(box1);
+                // Our flower pickers are fans of bruteforcing their work. They go through every box 
+                // and check if they can pick the flowers for their order in their pick list.
+                if (pickerRepo.RetrievePicker("96").canPickFlowersFrom(b))
+                {
+                    pickerRepo.RetrievePicker("96").pickFlowers(b);
+
+                }
+                if (pickerRepo.RetrievePicker("42").canPickFlowersFrom(b))
+                {
+
+                    pickerRepo.RetrievePicker("42").pickFlowers(b);
+                }
             }
-
-            if (pickerRepo.RetrievePicker("96").canPickFlowers(box2) == true)
-            {
-                pickerRepo.RetrievePicker("96").pickFlowers(box2);
-            }
-
-            if (pickerRepo.RetrievePicker("42").canPickFlowers(box2) == true)
-            {
-                pickerRepo.RetrievePicker("42").pickFlowers(box2);
-            }
-
-            Console.WriteLine("is pick list 0 complete : " + generalOrder.pickLists[0].status);        
-
-            Console.WriteLine("Box 1 has this many flowers now " + box1.flowerAmount + " and they are " + box1.flower.type);
-            Console.WriteLine("Box 2 has this many flowers now " + box2.flowerAmount + " and they are " + box2.flower.type);
         }
 
         public static void assignPickersWork(Picker picker, OrderList generalOrder)
@@ -56,7 +55,7 @@ namespace FlowerBusiness.Domain
             }
 
             generalOrder.pickLists[indexOfList].associatePickerToList(picker);
-            picker.associatePickerToList(generalOrder.pickLists[indexOfList]);
+            picker.associateListToPicker(generalOrder.pickLists[indexOfList]);
         }
     }
 }

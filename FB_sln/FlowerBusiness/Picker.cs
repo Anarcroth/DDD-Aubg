@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace FlowerBusiness.Domain
 {
@@ -28,7 +29,7 @@ namespace FlowerBusiness.Domain
             this.name = name;
         }
 
-        public void associatePickerToList(PickList pickList)
+        public void associateListToPicker(PickList pickList)
         {
             if (pickList == null)
             {
@@ -38,29 +39,37 @@ namespace FlowerBusiness.Domain
             this.pickList = pickList;
         }
 
-        public bool canPickFlowers(Box box)
+        public bool canPickFlowersFrom(Box box)
         {
-           foreach (Items it in pickList.pickListItems)
+            var check = this.pickList.Items.Any(fl => fl.Flowers.type.Equals(box.flower.type));
+
+            if (check && box.notEmpty())
             {
-                if (it.Flowers.HasSameType(box.flower.type) && box.flowerAmount > it.amount)
-                {
-                    return true;
-                }
+                return true;
             }
-           return false;
+            return false;
         }
 
         public void pickFlowers(Box box)
         {
-            foreach (Items it in pickList.pickListItems)
+            foreach (Item item in pickList.Items)
             {
-                if (it.Flowers.HasSameType(box.flower.type) && box.flowerAmount > it.amount)
+                if (item.Flowers.HasSameType(box.flower.type))
                 {
-                    box.flowerAmount -= it.amount;
-                    it.pickItem(it.amount);
-                }
+                    int pickedAmount = Math.Abs(item.amount - box.flowerAmount);
+                    item.pickItem(pickedAmount);
 
-                pickList.checkItemAmount(it);
+                    if (box.flowerAmount == pickedAmount)
+                    {
+                        box = null;
+                    }
+                    else
+                    {
+                        // Create a brand new box with a new identifier, but with the same type of flower
+                        box = new Box(Guid.NewGuid().ToString(), pickedAmount, box.flower);
+                    }
+                }
+                pickList.checkItemAmount(item);
             }
         }
     }

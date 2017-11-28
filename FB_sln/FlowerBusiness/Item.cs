@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FlowerBusiness.Domain
 {
-    public class Items
+    public class Item
     {
         public Flower Flowers { get; set; }
 
@@ -12,7 +12,7 @@ namespace FlowerBusiness.Domain
 
         public string status { get; set; }
 
-        public Items(Flower fl, int amount)
+        public Item(Flower fl, int amount)
         {
             if (amount == 0)
             {

@@ -6,6 +6,11 @@ namespace FlowerBusiness.Domain
 {
     public class Box
     {
+        public Flower flower { get; set; }
+
+        public int flowerAmount { get; set; }
+
+        public string id { get; set; }
         public Box(string id, int flowerAmount, Flower flower)
         {
             if (flower == null)
@@ -28,10 +33,13 @@ namespace FlowerBusiness.Domain
             this.flower = flower;
         }
 
-        public Flower flower { get; set; }
-
-        public int flowerAmount { get; set; }
-
-        public string id { get; set; }
+        public bool notEmpty()
+        {
+            if (flowerAmount > 0)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
