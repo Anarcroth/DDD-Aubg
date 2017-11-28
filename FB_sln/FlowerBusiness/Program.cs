@@ -7,7 +7,7 @@ namespace FlowerBusiness.Domain
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello To Flower Picking World!");
+            Console.WriteLine("Hello To Flower Picking World!\n");
 
             var pickerRepo = new DummyPickerRepository();
 
@@ -32,19 +32,24 @@ namespace FlowerBusiness.Domain
                 if (pickerRepo.RetrievePicker("96").canPickFlowersFrom(b))
                 {
                     pickerRepo.RetrievePicker("96").pickFlowers(b);
-
                 }
                 if (pickerRepo.RetrievePicker("42").canPickFlowersFrom(b))
                 {
-
-                    pickerRepo.RetrievePicker("42").pickFlowers(b);
+                    //pickerRepo.RetrievePicker("42").pickFlowers(b);
                 }
+            }
+
+
+            foreach (Item i in pickerRepo.RetrievePicker("96").pickList.Items)
+            {
+            Console.WriteLine("a: " + i.amount + " b: " + i.status + " c: " + i.Flowers.type);
+
             }
         }
 
         public static void assignPickersWork(Picker picker, OrderList generalOrder)
         {
-            Console.WriteLine("The two pickers have to be assigned to an order." +
+            Console.WriteLine("\nThe two pickers have to be assigned to an order.\n" +
                 "From the 5 pick lists, which one should " + picker.name + " be assigned to?\n");
 
             int indexOfList = int.Parse(Console.ReadLine());

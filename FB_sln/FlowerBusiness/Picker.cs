@@ -54,19 +54,18 @@ namespace FlowerBusiness.Domain
         {
             foreach (Item item in pickList.Items)
             {
-                if (item.Flowers.HasSameType(box.flower.type))
+                if (item.Flowers.HasSameType(box.flower.type) && item.status != "COMPLETE")
                 {
-                    int pickedAmount = Math.Abs(item.amount - box.flowerAmount);
-                    item.pickItem(pickedAmount);
+                    item.pickItem(item.amount);
 
-                    if (box.flowerAmount == pickedAmount)
+                    if (box.flowerAmount > item.amount)
                     {
-                        box = null;
+                        // Create a brand new box with a new identifier, but with the same type of flower
+                        box = new Box(Guid.NewGuid().ToString(), Math.Abs(item.amount - box.flowerAmount), box.flower);
                     }
                     else
                     {
-                        // Create a brand new box with a new identifier, but with the same type of flower
-                        box = new Box(Guid.NewGuid().ToString(), pickedAmount, box.flower);
+                        box = null;
                     }
                 }
                 pickList.checkItemAmount(item);
