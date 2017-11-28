@@ -8,19 +8,38 @@ namespace FlowerBusiness.Domain
         {
             Console.WriteLine("Hello To Flower Picking World!");
 
-            OrderList generalOrder = new OrderList();
-
             var emRepo = new DummyPickerRepository();
 
-            generalOrder.pickLists[0].pickListItems.Add(new Items(new Flower("roses"), 5));
-            generalOrder.pickLists[0].pickListItems.Add(new Items(new Flower("tulips"), 8));
-            generalOrder.pickLists[1].pickListItems.Add(new Items(new Flower("roses"), 10));
-            generalOrder.pickLists[1].pickListItems.Add(new Items(new Flower("tulips"), 15));
+            OrderList generalOrder = new OrderList(5);
 
-            generalOrder.pickLists[0].associatePickerToList(emRepo.RetrievePicker("96"));
-            emRepo.RetrievePicker("96").associatePickerToList(generalOrder.pickLists[0]);
-            generalOrder.pickLists[1].associatePickerToList(emRepo.RetrievePicker("42"));
-            emRepo.RetrievePicker("42").associatePickerToList(generalOrder.pickLists[1]);
+            generalOrder.populatePickLists();
+
+            Console.WriteLine("The two pickers have to be assigned to an order." +
+                "From the 5 pick lists, which one should " + emRepo.RetrievePicker("96") + " be assigned to?\n");
+
+            int indexOfList = int.Parse(Console.ReadLine());
+
+            if (indexOfList > generalOrder.pickLists.Count)
+            {
+                new Exception("The selected pick list doesn't exist");
+            }
+
+            generalOrder.pickLists[indexOfList].associatePickerToList(emRepo.RetrievePicker("96"));
+            emRepo.RetrievePicker("96").associatePickerToList(generalOrder.pickLists[indexOfList]);
+
+
+            Console.WriteLine("The two pickers have to be assigned to an order." +
+                "From the 5 pick lists, which one should " + emRepo.RetrievePicker("42") + " be assigned to?\n");
+
+            indexOfList = int.Parse(Console.ReadLine());
+
+            if (indexOfList > generalOrder.pickLists.Count)
+            {
+                new Exception("The selected pick list doesn't exist");
+            }
+
+            generalOrder.pickLists[indexOfList].associatePickerToList(emRepo.RetrievePicker("42"));
+            emRepo.RetrievePicker("42").associatePickerToList(generalOrder.pickLists[indexOfList]);
 
             Box box1 = new Box("1", 20, new Flower("roses"));
             Box box2 = new Box("2", 20, new Flower("tulips"));

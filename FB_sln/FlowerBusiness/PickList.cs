@@ -7,22 +7,30 @@ namespace FlowerBusiness.Domain
 {
     public class PickList
     {
-        public int id { get; set; }
+        public string id { get; set; }
 
         public List<Items> pickListItems { get; set; }
 
         public Picker picker { get; set; }
 
         public string status { get; set; }
+
         public PickList()
         {
-            // Set default id value
-            status = "Not started";
-            id = id.GetHashCode() + 100;
+            id = Guid.NewGuid().ToString();
+            status = "Pick List " + id + " not started";
+            // The default size of the pick list is with 2 items in it
             pickListItems = new List<Items>(2);
         }
 
-        public PickList(List<Items> items, int id, Picker picker, string status)
+        public PickList(int size)
+        {
+            id = Guid.NewGuid().ToString();
+            status = "Pick List " + id + " not started";
+            pickListItems = new List<Items>(size);
+        }
+
+        public PickList(List<Items> items, string id, Picker picker, string status)
         {
             pickListItems = items;
             this.id = id;
