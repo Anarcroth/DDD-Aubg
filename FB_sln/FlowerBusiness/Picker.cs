@@ -6,6 +6,12 @@ namespace FlowerBusiness.Domain
 {
     public class Picker
     {
+        public string id { get; private set; }
+
+        public string name { get; private set; }
+
+        public PickList pickList { get; set; }
+
         public Picker(string id, string name)
         {
             if (string.IsNullOrEmpty(id))
@@ -21,12 +27,6 @@ namespace FlowerBusiness.Domain
             this.id = id;
             this.name = name;
         }
-
-        public string id { get; private set; }
-
-        public string name { get; private set; }
-
-        public PickList pickList { get; set; }
 
         public void associatePickerToList(PickList pickList)
         {

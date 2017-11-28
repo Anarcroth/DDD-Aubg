@@ -25,13 +25,13 @@ namespace FlowerBusiness.Domain
             pickLists.Add(new PickList());
         }
 
-        public OrderList(int numPickLists)
+        public OrderList(int size)
         {
-            pickLists = new List<PickList>(numPickLists);
-            for (int n = 0; n < numPickLists; n++)
+            pickLists = new List<PickList>(size);
+            for (int n = 0; n < size; n++)
             {
                 // For all means and purposes, just populate the list with random numbers from 1 to 10, as to simulate a normal order of flowers
-                pickLists.Add(new PickList(rnd.Next(1,11)));
+                pickLists.Add(new PickList(rnd.Next(1, 11)));
             }
 
             status = "Order List " + id + " not started";
@@ -54,11 +54,14 @@ namespace FlowerBusiness.Domain
 
         public void populatePickLists()
         {
-            string[] flowerTypes = { "roses", "tulips", "lillies", "tomatos" };
+            string[] flowerTypes = { "roses", "tulips", "lillies", "tomatoes" };
 
             foreach (PickList list in pickLists)
             {
-                list.pickListItems.Add(new Items(new Flower(flowerTypes[rnd.Next(0, flowerTypes.Length)]), rnd.Next(1, 6)));
+                for (int n = 0; n < list.pickListItems.Capacity; n++)
+                {
+                    list.pickListItems.Add(new Items(new Flower(flowerTypes[rnd.Next(0, flowerTypes.Length)]), rnd.Next(1, 6)));
+                }
             }
         }
     }

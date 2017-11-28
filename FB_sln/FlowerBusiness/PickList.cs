@@ -46,7 +46,7 @@ namespace FlowerBusiness.Domain
             }
         }
 
-        public void changeEmployee(Picker picker)
+        public void changePicker(Picker picker)
         {
             if (picker != this.picker)
             {
