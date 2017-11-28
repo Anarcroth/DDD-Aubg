@@ -36,7 +36,12 @@ namespace FlowerBusiness.Domain
 
             if (pickerRepo.RetrievePicker("96").completedPickList())
             {
-                //pickerRepo.RetrievePicker("96").packageFlowers();
+                pickerRepo.RetrievePicker("96").packageFlowers();
+            }
+
+            if (pickerRepo.RetrievePicker("42").completedPickList())
+            {
+                pickerRepo.RetrievePicker("42").packageFlowers();
             }
 
             // Before closing the shift, update the status of the Order List

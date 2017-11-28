@@ -52,7 +52,7 @@ namespace FlowerBusiness.Domain
         {
             if (this.flowerAmount > amount)
             {
-                // Create a brand new box with a new identifier, but with the same type of flower
+                // Imitate creating a brand new box with a new identifier, but with the same type of flower
                 this.id = Guid.NewGuid().ToString();
                 this.flowerAmount = Math.Abs(amount - this.flowerAmount);
             }

@@ -57,7 +57,7 @@ namespace FlowerBusiness.Domain
                 if (item.Flowers.HasSameType(box.flower.type) && item.status != "COMPLETE")
                 {
                     int amount = item.amount;
-
+                        
                     item.pickItem(amount);
 
                     box.updateSize(amount);
@@ -73,6 +73,11 @@ namespace FlowerBusiness.Domain
                 return false;
             }
             return false;
+        }
+
+        public void packageFlowers()
+        {
+            //TODO create new pallet and fill it with the flowers
         }
     }
 }
