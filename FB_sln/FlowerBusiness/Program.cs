@@ -18,14 +18,9 @@ namespace FlowerBusiness.Domain
             assignPickersWork(pickerRepo.RetrievePicker("96"), generalOrder);
             assignPickersWork(pickerRepo.RetrievePicker("42"), generalOrder);
 
-            List<Box> bin = new List<Box>(4);
+            Bin bin = new Bin();
 
-            bin.Add(new Box(Guid.NewGuid().ToString(), 20, new Flower("roses")));
-            bin.Add(new Box(Guid.NewGuid().ToString(), 20, new Flower("tulips")));
-            bin.Add(new Box(Guid.NewGuid().ToString(), 20, new Flower("lillies")));
-            bin.Add(new Box(Guid.NewGuid().ToString(), 20, new Flower("tomatoes")));
-
-            foreach (Box b in bin)
+            foreach (Box b in bin.boxes)
             {
                 // Our flower pickers are fans of bruteforcing their work. They go through every box 
                 // and check if they can pick the flowers for their order in their pick list.
