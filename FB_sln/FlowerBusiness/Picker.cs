@@ -52,18 +52,14 @@ namespace FlowerBusiness.Domain
 
         public void pickFlowersFrom(Box box)
         {
-            foreach (Item item in pickList.Items)
-            {
-                if (item.Flowers.HasSameType(box.flower.type) && !item.isComplete())
-                {
-                    int amount = item.amount;
-                        
-                    item.pickItem(amount);
+            List<Item> itemsToPick = pickList.Items.FindAll(it => it.Flowers.HasSameType(box.flower.type) && !it.isComplete());
 
-                    box.updateSize(amount);
-                }
-                pickList.checkItemAmount(item);
-            }
+            itemsToPick.ForEach(it =>
+            {
+                box.updateSize(it.amount);
+                it.pickItem(it.amount);
+                pickList.checkItemAmount(it);
+            });
         }
 
         public bool completedPickList()

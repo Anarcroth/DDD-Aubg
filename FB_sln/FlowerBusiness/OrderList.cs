@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace FlowerBusiness.Domain
 {
-    class OrderList
+    class OrderList : GenericStatus
     {
         // Used to simulate a random generation of orders and items
         private static readonly Random rnd = new Random();
@@ -14,11 +14,8 @@ namespace FlowerBusiness.Domain
 
         public string id { get; }
 
-        public string status { get; set; }
-
         public OrderList()
         {
-            status = "INCOMPLETE";
             id = Guid.NewGuid().ToString();
             // Default size number of the order list is with 2 pick lists
             pickLists = new List<PickList>(2);
@@ -34,8 +31,6 @@ namespace FlowerBusiness.Domain
                 // For all means and purposes, just populate the list with random numbers from 1 to 10, as to simulate a normal order of flowers
                 pickLists.Add(new PickList(rnd.Next(1, 11)));
             }
-
-            status = "INCOMPLETE";
         }
 
         public OrderList(List<PickList> lists, string id, string status)
@@ -51,7 +46,7 @@ namespace FlowerBusiness.Domain
 
             if (allDone)
             {
-                this.status = "COMPLETE";
+                this.updateStatus("COMPLETE");
             }
         }
 
@@ -66,15 +61,6 @@ namespace FlowerBusiness.Domain
                     list.Items.Add(new Item(new Flower(flowerTypes[rnd.Next(0, flowerTypes.Length)]), rnd.Next(1, 6)));
                 }
             }
-        }
-
-        public bool isComplete()
-        {
-            if (status == "COMPLETE")
-            {
-                return true;
-            }
-            return false;
         }
     }
 }

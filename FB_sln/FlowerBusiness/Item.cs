@@ -4,13 +4,11 @@ using System.Text;
 
 namespace FlowerBusiness.Domain
 {
-    public class Item
+    public class Item : GenericStatus
     {
         public Flower Flowers { get; set; }
 
         public int amount { get; set; }
-
-        public string status { get; set; }
 
         public Item(Flower fl, int amount)
         {
@@ -21,8 +19,6 @@ namespace FlowerBusiness.Domain
 
             this.Flowers = fl;
             this.amount = amount;
-
-            status = "INCOMPLETE";
         }
 
         public void pickItem(int amount)
@@ -31,25 +27,8 @@ namespace FlowerBusiness.Domain
 
             if (this.amount == 0)
             {
-                updateStatus("COMPLETE");
+                this.updateStatus("COMPLETE");
             }
-        }
-
-        private void updateStatus(string status)
-        {
-            if (this.status != status)
-            {
-                this.status = status;
-            }
-        }
-
-        public bool isComplete()
-        {
-            if (this.status == "COMPLETE")
-            {
-                return true;
-            }
-            return false;
         }
     }
 }

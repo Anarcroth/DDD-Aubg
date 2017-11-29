@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace FlowerBusiness.Domain
 {
-    public class PickList
+    public class PickList : GenericStatus
     {
         public string id { get; set; }
 
@@ -13,12 +13,9 @@ namespace FlowerBusiness.Domain
 
         public Picker picker { get; set; }
 
-        public string status { get; set; }
-
         public PickList()
         {
             id = Guid.NewGuid().ToString();
-            status = "INCOMPLETE";
             // The default size of the pick list is with 2 items in it
             Items = new List<Item>(2);
         }
@@ -26,7 +23,6 @@ namespace FlowerBusiness.Domain
         public PickList(int size)
         {
             id = Guid.NewGuid().ToString();
-            status = "INCOMPLETE";
             Items = new List<Item>(size);
         }
 
@@ -36,14 +32,6 @@ namespace FlowerBusiness.Domain
             this.id = id;
             this.picker = picker;
             this.status = status;
-        }
-
-        public void updateStatus(string status)
-        {
-            if (status != this.status)
-            {
-                this.status = status;
-            }
         }
 
         public void changePicker(Picker picker)
@@ -86,15 +74,6 @@ namespace FlowerBusiness.Domain
             {
                 this.updateStatus("COMPLETE");
             }
-        }
-
-        public bool isComplete()
-        {
-            if (status == "COMPLETE")
-            {
-                return true;
-            }
-            return false;
         }
     }
 }
