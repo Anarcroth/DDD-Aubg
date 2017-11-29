@@ -8,9 +8,13 @@ namespace FlowerBusiness.Domain
     {
         public string id { get; set; }
 
+        public string pickListId { get; set; }
+
+        public string pickerId { get; set; }
+
         public int maxBoxCapacity { get; set; }
 
-        public List<Box> boxes { get; set; }
+        public PickList boxes { get; set; }
 
         public Pallet()
         {
@@ -19,16 +23,14 @@ namespace FlowerBusiness.Domain
             maxBoxCapacity = 20;
         }
 
-        public Pallet(List<Box> boxes)
+        public Pallet(string pickListId, string pickerId, PickList boxes)
         {
             id = Guid.NewGuid().ToString();
             maxBoxCapacity = 20;
 
-            if (maxBoxCapacity < boxes.Count)
-            {
-                new Exception("The pallet cannot hold this many boxes");
-            }
-
+            this.pickListId = pickListId;
+            this.pickerId = pickerId;
+          
             this.boxes = boxes;
         }
     }

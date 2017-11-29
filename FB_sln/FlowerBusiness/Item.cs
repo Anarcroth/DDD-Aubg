@@ -10,6 +10,11 @@ namespace FlowerBusiness.Domain
 
         public int amount { get; set; }
 
+        public Item()
+        {
+
+        }
+
         public Item(Flower fl, int amount)
         {
             if (amount == 0)

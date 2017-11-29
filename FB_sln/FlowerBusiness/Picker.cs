@@ -13,6 +13,8 @@ namespace FlowerBusiness.Domain
 
         public PickList pickList { get; private set; }
 
+        public List<Item> currentOrder { get; set; }
+
         public Picker(string id, string name)
         {
             if (string.IsNullOrEmpty(id))
@@ -37,6 +39,7 @@ namespace FlowerBusiness.Domain
             }
 
             this.pickList = pickList;
+            currentOrder = new List<Item>(pickList.Items.Count);
         }
 
         public bool canPickFlowersFrom(Box box)
@@ -71,6 +74,7 @@ namespace FlowerBusiness.Domain
 
                 // appologies for the long quesiton.
                 box.updateSize(it.amount);
+                currentOrder.Add(it);
                 it.pickItem(it.amount);
                 pickList.checkItemAmount(it);
             });
@@ -80,14 +84,24 @@ namespace FlowerBusiness.Domain
         {
             if (pickList.isComplete())
             {
-                return false;
+                return true;
             }
             return false;
         }
 
-        public void packageFlowers()
+        public void organizePickList()
         {
-            //TODO create new pallet and fill it with the flowers
+            List<Item> group = currentOrder.GroupBy(it => it.Flowers.type).Select(g => new Item
+            {
+                Flowers = g.First().Flowers,
+                status = g.First().status,
+                amount = g.Sum(c => c.amount),
+            }).ToList();
+
+            foreach(Item i in group)
+            {
+                Console.WriteLine(i.amount + " -- " + i.Flowers.type + " " + i.status);
+            }
         }
     }
 }

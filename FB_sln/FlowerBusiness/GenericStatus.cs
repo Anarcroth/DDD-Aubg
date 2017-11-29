@@ -6,7 +6,7 @@ namespace FlowerBusiness.Domain
 {
     public abstract class GenericStatus
     {
-        public string status { get; protected set; }
+        public string status { get; set; }
 
         public GenericStatus()
         {
