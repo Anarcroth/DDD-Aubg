@@ -50,15 +50,15 @@ namespace FlowerBusiness.Domain
 
         public void updateSize(int amount)
         {
-            if (this.flowerAmount > amount)
+            if (flowerAmount > amount)
             {
                 // Imitate creating a brand new box with a new identifier, but with the same type of flower
-                this.id = Guid.NewGuid().ToString();
-                this.flowerAmount = Math.Abs(amount - this.flowerAmount);
+                id = Guid.NewGuid().ToString();
+                flowerAmount = Math.Abs(amount - flowerAmount);
             }
             else
             {
-                this.flowerAmount = 0;
+                flowerAmount = 0;
             }
         }
     }

@@ -29,7 +29,7 @@ namespace FlowerBusiness.Domain
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            yield return this.type;
+            yield return type;
         }
     }
 }

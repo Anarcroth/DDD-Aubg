@@ -21,7 +21,7 @@ namespace FlowerBusiness.Domain
                 return true;
             }
 
-            if (this.GetType() != obj.GetType())
+            if (GetType() != obj.GetType())
             {
                 return false;
             }

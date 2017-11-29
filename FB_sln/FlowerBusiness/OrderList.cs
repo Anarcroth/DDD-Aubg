@@ -35,18 +35,18 @@ namespace FlowerBusiness.Domain
 
         public OrderList(List<PickList> lists, string id, string status)
         {
-            this.pickLists = lists;
+            pickLists = lists;
             this.id = id;
             this.status = status;
         }
 
         public void updateStatus()
         {
-            var allDone = this.pickLists.All(i => i.isComplete());
+            var allDone = pickLists.All(i => i.isComplete());
 
             if (allDone)
             {
-                this.updateStatus("COMPLETE");
+                updateStatus("COMPLETE");
             }
         }
 

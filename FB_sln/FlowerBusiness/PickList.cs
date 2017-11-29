@@ -44,7 +44,7 @@ namespace FlowerBusiness.Domain
 
         private bool isListTaken()
         {
-            if (this.picker == null)
+            if (picker == null)
             {
                 return false;
             }
@@ -68,11 +68,11 @@ namespace FlowerBusiness.Domain
 
         public void checkItemAmount(Item item)
         {
-            var allPicked = this.Items.All(i => i.isComplete());
+            var allPicked = Items.All(i => i.isComplete());
 
             if (allPicked)
             {
-                this.updateStatus("COMPLETE");
+                updateStatus("COMPLETE");
             }
         }
     }

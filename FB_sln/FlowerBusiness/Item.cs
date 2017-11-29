@@ -17,7 +17,7 @@ namespace FlowerBusiness.Domain
                 new NullReferenceException("no flower amount specified");
             }
 
-            this.Flowers = fl;
+            Flowers = fl;
             this.amount = amount;
         }
 
@@ -27,7 +27,7 @@ namespace FlowerBusiness.Domain
 
             if (this.amount == 0)
             {
-                this.updateStatus("COMPLETE");
+                updateStatus("COMPLETE");
             }
         }
     }

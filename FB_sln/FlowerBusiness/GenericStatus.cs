@@ -10,7 +10,7 @@ namespace FlowerBusiness.Domain
 
         public GenericStatus()
         {
-            this.status = "INCOMPLETE";
+            status = "INCOMPLETE";
         }
 
         public bool isComplete()

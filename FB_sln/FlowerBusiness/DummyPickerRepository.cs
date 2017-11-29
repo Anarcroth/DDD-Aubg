@@ -11,8 +11,8 @@ namespace FlowerBusiness.Domain
 
         public DummyPickerRepository()
         {
-            this.Martha = new Picker("96", "Martha");
-            this.Benny = new Picker("42", "Benny");
+            Martha = new Picker("96", "Martha");
+            Benny = new Picker("42", "Benny");
         }
 
         public Picker RetrievePicker(string id)
