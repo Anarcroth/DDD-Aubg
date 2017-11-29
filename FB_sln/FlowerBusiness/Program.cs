@@ -34,21 +34,14 @@ namespace FlowerBusiness.Domain
                 }
             }
 
-            pickerRepo.RetrievePicker("96").organizePickList();
-
             if (pickerRepo.RetrievePicker("96").completedPickList())
             {
-                Console.WriteLine("creating a pallet");
+                pickerRepo.RetrievePicker("96").organizePickList();
+
                 Pallet pall1 = new Pallet(
                     pickerRepo.RetrievePicker("96").pickList.id,
                     pickerRepo.RetrievePicker("96").id,
-                    pickerRepo.RetrievePicker("96").pickList);
-
-                foreach (Item pl in pall1.boxes.Items)
-                {
-
-                    Console.WriteLine(pl.status + " -- " + pl.amount + " -- " + pl.Flowers.type);
-                }
+                    pickerRepo.RetrievePicker("96").currentOrder);
             }
 
             if (pickerRepo.RetrievePicker("42").completedPickList())
@@ -56,7 +49,7 @@ namespace FlowerBusiness.Domain
                 Pallet pall2 = new Pallet(
                     pickerRepo.RetrievePicker("42").pickList.id,
                     pickerRepo.RetrievePicker("42").id,
-                    pickerRepo.RetrievePicker("42").pickList);
+                    pickerRepo.RetrievePicker("42").currentOrder);
             }
 
             // Before closing the shift, update the status of the Order List

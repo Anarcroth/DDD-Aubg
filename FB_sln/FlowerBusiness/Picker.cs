@@ -74,7 +74,7 @@ namespace FlowerBusiness.Domain
 
                 // appologies for the long quesiton.
                 box.updateSize(it.amount);
-                currentOrder.Add(it);
+                currentOrder.Add(new Item(it.Flowers, it.amount));
                 it.pickItem(it.amount);
                 pickList.checkItemAmount(it);
             });
@@ -94,14 +94,8 @@ namespace FlowerBusiness.Domain
             List<Item> group = currentOrder.GroupBy(it => it.Flowers.type).Select(g => new Item
             {
                 Flowers = g.First().Flowers,
-                status = g.First().status,
                 amount = g.Sum(c => c.amount),
             }).ToList();
-
-            foreach(Item i in group)
-            {
-                Console.WriteLine(i.amount + " -- " + i.Flowers.type + " " + i.status);
-            }
         }
     }
 }
