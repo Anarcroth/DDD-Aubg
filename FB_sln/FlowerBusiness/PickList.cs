@@ -80,12 +80,21 @@ namespace FlowerBusiness.Domain
 
         public void checkItemAmount(Item item)
         {
-            var allPicked = this.Items.All(i => i.status == "COMPLETE");
+            var allPicked = this.Items.All(i => i.isComplete());
 
             if (allPicked)
             {
                 this.updateStatus("COMPLETE");
             }
+        }
+
+        public bool isComplete()
+        {
+            if (status == "COMPLETE")
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

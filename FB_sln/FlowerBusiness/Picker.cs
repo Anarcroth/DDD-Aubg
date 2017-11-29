@@ -54,7 +54,7 @@ namespace FlowerBusiness.Domain
         {
             foreach (Item item in pickList.Items)
             {
-                if (item.Flowers.HasSameType(box.flower.type) && item.status != "COMPLETE")
+                if (item.Flowers.HasSameType(box.flower.type) && !item.isComplete())
                 {
                     int amount = item.amount;
                         
@@ -68,7 +68,7 @@ namespace FlowerBusiness.Domain
 
         public bool completedPickList()
         {
-            if (pickList.status == "COMPLETE")
+            if (pickList.isComplete())
             {
                 return false;
             }

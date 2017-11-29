@@ -42,5 +42,14 @@ namespace FlowerBusiness.Domain
                 this.status = status;
             }
         }
+
+        public bool isComplete()
+        {
+            if (this.status == "COMPLETE")
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

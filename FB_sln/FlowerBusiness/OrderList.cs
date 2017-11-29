@@ -47,7 +47,7 @@ namespace FlowerBusiness.Domain
 
         public void updateStatus()
         {
-            var allDone = this.pickLists.All(i => i.status == "COMPLETE");
+            var allDone = this.pickLists.All(i => i.isComplete());
 
             if (allDone)
             {
@@ -66,6 +66,15 @@ namespace FlowerBusiness.Domain
                     list.Items.Add(new Item(new Flower(flowerTypes[rnd.Next(0, flowerTypes.Length)]), rnd.Next(1, 6)));
                 }
             }
+        }
+
+        public bool isComplete()
+        {
+            if (status == "COMPLETE")
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
