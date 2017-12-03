@@ -1,0 +1,20 @@
+Topic: CQRS pattern
+
+This is a pattern that allows us to upgrade our information in the DataBase and use it only for that purpose.
+It does bring complexity, but when needed it can help the separation of duties. When our system gets too big
+we might need to re-think how we interavt with the data and our storage, we might see some groupings of data
+and we might need to start separating our models into more concepts. This model nicely fits with event based
+models. It is best implemented in a Bounded Context, where each Bounded Context needs it own model and decision
+making.
+
+When we have a model in our system CQRS splits that model into two sub-models, where one is a Query model and
+the other one is a Command model. Thus instead of having a complex mixed model for both mutation and retrieval
+, now we have a more complext representation, but it allows us to scale better and see underlying patterns in
+our domain.
+
+This is usually done through splitting a class into two separate classes, where the two new classes specifically
+and only handle retrieval and mutaion services.
+
+resources:
+http://codebetter.com/gregyoung/2010/02/16/cqrs-task-based-uis-event-sourcing-agh/
+https://martinfowler.com/bliki/CQRS.html
