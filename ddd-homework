@@ -1,7 +1,13 @@
 Topic: CQRS pattern
 
+CQRS - Comman Query Resposibility Segregation - is a pattern used as a substitue for the CRUD pattern and has
+applications on DDD, more specifically, in Bounded Contexts.
+
+In general, this pattern separates our one big model into two, where instead of wirting and reading to the DB
+through one piece of logic, we have those functions divided into two classes.
+
 This is a pattern that allows us to upgrade our information in the DataBase and use it only for that purpose.
-It does bring complexity, but when needed it can help the separation of duties. When our system gets too big
+It does bring complexity, but when needed, it can help the separation of duties. When our system gets too big
 we might need to re-think how we interavt with the data and our storage, we might see some groupings of data
 and we might need to start separating our models into more concepts. This model nicely fits with event based
 models. It is best implemented in a Bounded Context, where each Bounded Context needs it own model and decision
